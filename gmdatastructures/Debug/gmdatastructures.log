@@ -1,0 +1,4 @@
+﻿  dllmain.cpp
+E:\Code__Blocks\Projects\gmdatastructures\gmdatastructures\dllmain.cpp(36,24): warning C4244: "Argument": Konvertierung von "double" in "int", möglicher Datenverlust
+E:\Code__Blocks\Projects\gmdatastructures\gmdatastructures\dllmain.cpp(46,24): warning C4244: "Argument": Konvertierung von "double" in "int", möglicher Datenverlust
+  gmdatastructures.vcxproj -> E:\Code__Blocks\Projects\gmdatastructures\Debug\gmdatastructures.dll
