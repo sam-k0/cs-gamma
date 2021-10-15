@@ -1,5 +1,7 @@
 # cs-gamma
-DS rewrite (Mostly DSMaps)
-Still trying to figure stuff out. I need more time for this.
+CS-GAMMA stands for *C*plusplus Data*S*tructures in *GAM*e*MA*ker
 
-Provides functionality to create DSMAPS, add values, add DSMAPS to DSMAPS, multiadd to DSMAPS.
+Damn, what a slug of a name.
+
+Provides linked lists, dsmaps, stl vectors and more.
+Currently WIP
