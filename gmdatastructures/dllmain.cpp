@@ -6,8 +6,15 @@
 #include <cstdarg>
 #include <vector>
 #include <string>
+#include "permanent.h"
+#include "vectorContainer.h"
 #define gmx extern "C" __declspec(dllexport)
 
+#define gmtrue 1.0;
+#define gmfalse 0.0;
+
+permanentContainer* p = nullptr;
+VectorContainer* vc = nullptr;
 
 const int EVENT_OTHER_SOCIAL = 70;
 
@@ -30,6 +37,59 @@ gmx void RegisterCallbacks(char* arg1, char* arg2, char* arg3, char* arg4) {
 
     DsMapAddDouble = DsMapAddDoublePtr;
     DsMapAddString = DsMapAddStringPtr;
+}
+
+gmx double cs_list_init()
+{
+    if (p != nullptr) // catch reinit
+    {
+        cout << "Reinitializing the container! DO NOT DO THIS!" << endl;
+        p->clearAll();
+    }
+
+    p = new permanentContainer();
+    cout << "Created new Container!" << endl;
+    return gmtrue;
+}
+
+gmx double cs_list_add_double(const char* key, double value)
+{
+    p->addNode(key, value);
+
+    return gmtrue;
+}
+
+gmx double cs_list_adv()
+{
+    bool res = p->advance();
+
+    if (res)
+    {
+        return gmtrue;
+    }
+    return gmfalse;
+}
+
+gmx double cs_list_ret()
+{
+    bool res = p->retreat();
+    if (res)
+    {
+        return gmtrue;
+    }
+    return gmfalse;
+}
+
+gmx double cs_list_getval()
+{
+    return (p->getCurrent()->getValue());
+}
+
+gmx double cs_list_cleanup()
+{
+    p->clearAll();
+    delete p;
+    return gmtrue;
 }
 
 gmx double cs_map_create() // Create a dsmap
@@ -133,13 +193,14 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:
-        //printf("[extension] DLL attached to process. \n");
+        printf("[extension] DLL attached to process. \n");
     case DLL_THREAD_ATTACH:
         //printf("[extension] DLL attached to thread. \n");
     case DLL_THREAD_DETACH:
         //printf("[extension] DLL detached from thread. \n");
     case DLL_PROCESS_DETACH:
-        //printf("[extension] DLL detached from process. \n");
+        delete p;
+        printf("[extension] DLL detached from process. \n");
         break;
     }
     return TRUE;
