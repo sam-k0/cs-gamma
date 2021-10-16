@@ -8,6 +8,7 @@
 #include <string>
 #include "permanent.h"
 #include "vectorContainer.h"
+
 #define gmx extern "C" __declspec(dllexport)
 
 #define gmtrue 1.0;
@@ -39,6 +40,12 @@ gmx void RegisterCallbacks(char* arg1, char* arg2, char* arg3, char* arg4) {
     DsMapAddString = DsMapAddStringPtr;
 }
 
+char* gmgetchar(string s)
+{
+    char* ret = new char[s.length() + 1];
+    strcpy_s(ret,s.length()+1, s.c_str());
+    return ret;
+}
 // Vector
 gmx double cs_vec_init()
 {
@@ -57,6 +64,7 @@ gmx double cs_vec_create()
     cout << "Added vector with id " << vecid << endl;
     return vecid;
 }
+
 gmx double cs_vec_push_back(double index, const char* value)
 {
     vc->vvec_pushBack(int(index), string(value));
@@ -64,10 +72,11 @@ gmx double cs_vec_push_back(double index, const char* value)
     return gmtrue;
 }
 
-gmx const char* cs_vec_at(double index, double position)
+gmx char* cs_vec_at(double index, double position)
 {
-    string res = vc->vvec_at(int(index), int(position));
-    return res.c_str();
+    string temp = vc->vvec_at(int(index), int(position));
+    cout << "Returning "<< _strdup(temp.c_str());
+    return _strdup(temp.c_str());
 }
 
 gmx double cs_vec_size(double index)
@@ -105,6 +114,23 @@ gmx double cs_vec_insert(double index, double pos, const char* value)
     return gmtrue;
 }
 
+gmx double cs_vec_destroy(double index)
+{
+    bool res = vc->container_delVector(int(index));
+    if (!res)
+    {
+        return gmfalse;
+    }
+    return gmtrue;
+}
+
+gmx double cs_vec_free()
+{
+    vc->container_cleanUp();
+    delete vc;
+    cout << "Successfully destroyed vector container!" << endl;
+    return gmtrue;
+}
 // LL
 gmx double cs_list_init()
 {
