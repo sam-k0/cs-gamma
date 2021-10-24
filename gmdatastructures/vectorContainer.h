@@ -2,6 +2,8 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <fstream>
+#include <sstream>
 using namespace std;
 class VectorContainer {
 private:
@@ -165,6 +167,71 @@ public:
 		delete res;
 		container.at(index) = nullptr;
 		cout << "Successfully deleted vector " << index << endl;
+		return true;
+	}
+
+	bool save_to(string filepath, int index)
+	{
+		vector<string>* res = container_search(index);
+		if (!res)
+		{
+			cout << "Vector not found " << index << endl;
+			return false;
+		}
+
+		cout << "Writing text to file: " << filepath << endl;
+
+		// Create the file
+		ofstream outfile(filepath.c_str(), ios::out);
+
+		if (!outfile)
+		{
+			// Something went wrong creating the file
+			return false;
+		}
+		// Create stream
+		stringstream outstream;
+
+		// Loop over entries
+		for (int i = 0; i < res->size(); i ++)
+		{
+			outstream << res->at(i);
+			outstream << endl;
+		}
+
+		outfile << outstream.rdbuf();
+		outfile.close();
+		return true;
+	}
+
+	bool load_from(string filepath, int index)
+	{
+		char buffer[500];
+		ifstream source;
+		source.open(filepath.c_str(), ios::in);
+
+		if (!source)
+		{
+			cout << "Something went wrong reading the file." << endl;
+			return false;
+		}
+
+		string data;
+		while (source.getline(buffer, 499))
+		{
+			if (source.eof())
+			{
+				source.close();
+				cout << "End of file" << endl;
+				return true;
+			}
+
+			data = buffer;
+
+			vvec_pushBack(index, data);
+		}
+
+		source.close();
 		return true;
 	}
 };

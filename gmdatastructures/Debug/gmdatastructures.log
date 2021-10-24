@@ -1,3 +1,8 @@
-﻿  LINK : E:\Code__Blocks\Projects\gmdatastructures\Debug\gmdatastructures.dll wurde nicht gefunden oder beim letzten inkrementellen Linkvorgang nicht erstellt; vollständiger Link wird durchgeführt.
-     Bibliothek "E:\Code__Blocks\Projects\gmdatastructures\Debug\gmdatastructures.lib" und Objekt "E:\Code__Blocks\Projects\gmdatastructures\Debug\gmdatastructures.exp" werden erstellt.
+﻿  dllmain.cpp
+E:\Code__Blocks\Projects\gmdatastructures\gmdatastructures\permanent.h(18,16): warning C4244: "return": Konvertierung von "double" in "int", möglicher Datenverlust
+E:\Code__Blocks\Projects\gmdatastructures\gmdatastructures\vectorContainer.h(196,21): warning C4018: "<": Konflikt zwischen "signed" und "unsigned"
+E:\Code__Blocks\Projects\gmdatastructures\gmdatastructures\dllmain.cpp(200,24): warning C4244: "Argument": Konvertierung von "double" in "int", möglicher Datenverlust
+E:\Code__Blocks\Projects\gmdatastructures\gmdatastructures\dllmain.cpp(210,24): warning C4244: "Argument": Konvertierung von "double" in "int", möglicher Datenverlust
+E:\Code__Blocks\Projects\gmdatastructures\gmdatastructures\dllmain.cpp(221,24): warning C4244: "Argument": Konvertierung von "double" in "int", möglicher Datenverlust
+E:\Code__Blocks\Projects\gmdatastructures\gmdatastructures\dllmain.cpp(248,24): warning C4244: "Argument": Konvertierung von "double" in "int", möglicher Datenverlust
   gmdatastructures.vcxproj -> E:\Code__Blocks\Projects\gmdatastructures\Debug\gmdatastructures.dll
