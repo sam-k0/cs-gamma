@@ -79,6 +79,26 @@ gmx char* cs_vec_at(double index, double position)
     return _strdup(temp.c_str());
 }
 
+gmx double cs_vec_save_to(const char* path, double index)
+{
+    bool res = vc->save_to(string(path), (int)index);
+    if (res)
+    {
+        return double(1);
+    }
+    return double(0);
+}
+
+gmx double cs_vec_load(const char* path, double index)
+{
+    bool res = vc->load_from(string(path), (int)index);
+    if (!res)
+    {
+        return double(0);
+    }
+    return double(1);
+}
+
 gmx double cs_vec_size(double index)
 {
     return (double)vc->vvec_getSize(int(index));
