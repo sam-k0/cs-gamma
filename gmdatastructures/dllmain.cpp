@@ -144,6 +144,16 @@ gmx double cs_vec_destroy(double index)
     return gmtrue;
 }
 
+gmx double cs_vec_print(double index)
+{
+    bool res = vc->vvec_print(int(index));
+    if (!res)
+    {
+        return gmfalse;
+    }
+    return gmtrue;
+}
+
 gmx double cs_vec_free()
 {
     vc->container_cleanUp();

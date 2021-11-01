@@ -4,6 +4,8 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#define csvec vector<string>* 
+
 using namespace std;
 class VectorContainer {
 private:
@@ -153,6 +155,23 @@ public:
 			return container.at(id);
 		}
 
+	}
+
+	bool vvec_print(int id)
+	{
+		csvec res = container_search(id);
+		if (!res)
+		{
+			cout << "Vector not found " << id << endl;
+			return false;
+		}
+
+		cout << "Printing vector " << id <<":" <<endl;
+
+		for (int i = 0; i < res->size(); i ++)
+		{
+			cout << i << " : "<< res->at(i) << endl;
+		}
 	}
 
 	bool container_delVector(int index)
